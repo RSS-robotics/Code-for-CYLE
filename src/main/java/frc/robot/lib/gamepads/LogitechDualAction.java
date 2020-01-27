@@ -1,0 +1,36 @@
+/*----------------------------------------------------------------------------*/
+/* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
+/* Open Source Software - may be modified and shared by FRC teams. The code   */
+/* must be accompanied by the FIRST BSD license file in the root directory of */
+/* the project.                                                               */
+/*----------------------------------------------------------------------------*/
+
+package frc.robot.lib.gamepads;
+
+/**
+ * Output mapping constants for the Logitech Dual Action gamepad.
+ *
+ * @author FRC 1778 Chill Out
+ */
+public class LogitechDualAction {
+
+  public static final int DPAD = 0;
+  public static final int B1 = 1;
+  public static final int B2 = 2;
+  public static final int B3 = 3;
+  public static final int B4 = 4;
+  public static final int LEFT_BUMPER = 5;
+  public static final int RIGHT_BUMPER = 6;
+  public static final int LEFT_TRIGGER = 7;
+  public static final int RIGHT_TRIGGER = 8;
+  public static final int B9 = 9;
+  public static final int B10 = 10;
+  public static final int LEFT_JOYSTICK_BUTTON = 11;
+  public static final int RIGHT_JOYSTICK_BUTTON = 12;
+
+  public static final int AXIS_LEFT_X = 0;
+  public static final int AXIS_LEFT_Y = 1;
+  public static final int AXIS_RIGHT_X = 2;
+  public static final int AXIS_RIGHT_Y = 3;
+}
+
