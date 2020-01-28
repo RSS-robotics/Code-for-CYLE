@@ -32,6 +32,9 @@ public class Drivetrain extends TimedRobot {
     Faults _faults_L = new Faults();
     Faults _faults_R = new Faults();
 
+    ArrayList<Toggle> _toggle = new ArrayList<Toggle>();
+    ArrayList<ButtonDebouncer> _buttonDebouncer = new ArrayList<ButtonDebouncer>();
+
     @Override
     public void teleopPeriodic() {
 
@@ -84,6 +87,10 @@ public class Drivetrain extends TimedRobot {
         if (btn1) {
             System.out.println(work);
         }
+
+
+        Toggle.updateToggles(_toggle);
+        ButtonDebouncer.buttonDebouncers(_buttonDebouncer);
     }
 
     @Override
@@ -119,5 +126,10 @@ public class Drivetrain extends TimedRobot {
          * this so we can apply + to both sides when moving forward. DO NOT CHANGE
          */
         _diffDrive.setRightSideInverted(false);
+
+        for (int i = 0; i < 4; i++) {
+            _toggle.add(new Toggle(_joystick, i+1));
+            _buttonDebouncer.add(new ButtonDebouncer(_joystick, i));
+        }
     }
 }
