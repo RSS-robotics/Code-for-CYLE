@@ -32,8 +32,7 @@ public class Drivetrain extends TimedRobot {
     Faults _faults_L = new Faults();
     Faults _faults_R = new Faults();
 
-    ArrayList<Toggle> _toggle = new ArrayList<Toggle>();
-    ArrayList<ButtonDebouncer> _buttonDebouncer = new ArrayList<ButtonDebouncer>();
+    ArrayList<JoystickUtil> _joystickUtil = new ArrayList<JoystickUtil>();
 
     @Override
     public void teleopPeriodic() {
@@ -89,8 +88,7 @@ public class Drivetrain extends TimedRobot {
         }
 
 
-        Toggle.updateToggles(_toggle);
-        ButtonDebouncer.buttonDebouncers(_buttonDebouncer);
+        JoystickUtil.update(_joystickUtil);
     }
 
     @Override
@@ -128,8 +126,7 @@ public class Drivetrain extends TimedRobot {
         _diffDrive.setRightSideInverted(false);
 
         for (int i = 0; i < 4; i++) {
-            _toggle.add(new Toggle(_joystick, i+1));
-            _buttonDebouncer.add(new ButtonDebouncer(_joystick, i));
+            //_joystickUtil.add(new JoystickUtil(_joystick, button, debounce_period, isToggle));
         }
     }
 }
