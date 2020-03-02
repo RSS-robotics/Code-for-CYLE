@@ -36,6 +36,8 @@ public class NavXRotation implements PIDOutput{
 
     private final static double kToleranceDegrees = 2.0f;
 
+    private double currentRotationRate = 0;
+
     public NavXRotation() {
 
         myRobot = new RobotDrive(0, 1);
@@ -57,45 +59,21 @@ public class NavXRotation implements PIDOutput{
         LiveWindow.addActuator("DriveSystem", "RotateController", turnController);
     }
 
-    public void rotation() {
-        boolean rotateToAngle = false;
-
-            if (_joystick.getRawButton(1)) {//button to recalibrate angle / set current angle to 0 degrees
-                ahrs.reset();
-            }
-
-            if (_joystick.getRawButton(2)) {//button pressed to rotate, "forward"
-                turnController.setSetpoint(0.0f);
-                rotateToAngle = true;
-
-            } else if (_joystick.getRawButton(3)) {//button pressed to rotate, "right"
-                turnController.setSetpoint(90.0f);
-                rotateToAngle = true;
-
-            } else if (_joystick.getRawButton(4)) {//button pressed to rotate, "backward"
-                turnController.setSetpoint(179.9f);
-                rotateToAngle = true;
-
-            } else if (_joystick.getRawButton(5)) {//button pressed to rotate, "left"
-                turnController.setSetpoint(-90.0f);
-                rotateToAngle = true;
-            }
-
-            double currentRotationRate;
-
-            if(rotateToAngle) {
-                turnController.enable();
-                currentRotationRate = rotateToAngleRate;
-            } else {
-                turnController.disable();
-                currentRotationRate = _joystick.getTwist();
-            }
-
-            /*try {
-                myRobot.mecanumDrive_Cartesian(_joystick.getX(), _joystick.getY(), currentRotationRate, ahrs.getAngle());
-            } catch (RuntimeException ex){
-                DriverStation.reportError(" Error commmunicating with drive system: " + ex.getMessage(), true);
-            }*/
-
+    public double getCurrentRotationRate() {
+        return currentRotationRate;
+    } 
+    public AHRS getAHRS() {
+        return ahrs;
     }
+
+    public void calibrate() {
+        ahrs.reset();
+        rotating();
+    }
+
+    public void rotate(double angle) {
+        turnController.setSetPoint(angle);
+        turnController.enable();
+        currentRotationRate = rotateToAngleRate;
+    }   
 }
